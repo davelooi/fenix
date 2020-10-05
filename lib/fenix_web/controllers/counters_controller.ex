@@ -6,7 +6,9 @@ defmodule FenixWeb.CountersController do
   end
 
   def show(conn, %{"key" => key}) do
-    render(conn, "show.html", key: key, counter: 0)
+    import Ecto.Query
+    counter = Fenix.Repo.one(from c in Fenix.Counter, where: c.key == ^key)
+    render(conn, "show.html", key: counter.key, counter: counter.counter)
   end
 
   # def create(conn, %{"key" => key}) do
