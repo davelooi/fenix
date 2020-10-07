@@ -9,5 +9,6 @@ defmodule Fenix.Repo.Migrations.CreateCounters do
       timestamps()
     end
 
+    create unique_index(:counters, [:key])
   end
 end

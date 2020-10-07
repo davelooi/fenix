@@ -11,8 +11,8 @@ defmodule FenixWeb.CountersController do
     render(conn, "show.html", counter: counter)
   end
 
-  # def create(conn, %{"key" => key}) do
-  #   Repo.insert(%Counter{key: key, counter: 0})
-  #   redirect(conn, to: "/counters/#{key}")
-  # end
+  def create(conn, %{"key" => key}) do
+    Fenix.Repo.insert(%Fenix.Counter{key: key, counter: 0})
+    redirect(conn, to: "/counters/#{key}")
+  end
 end
