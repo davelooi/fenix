@@ -11,9 +11,16 @@ database_url =
     For example: ecto://USER:PASS@HOST/DATABASE
     """
 
+maintenance_database =
+  System.get_env("MAINTENANCE_DATABASE") ||
+    raise """
+    environment variable MAINTENANCE_DATABASE is missing.
+    """
+
 config :fenix, Fenix.Repo,
-  # ssl: true,
+  ssl: true,
   url: database_url,
+  maintenance_database: maintenance_database,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 secret_key_base =

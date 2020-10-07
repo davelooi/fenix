@@ -6,6 +6,8 @@ config :fenix, Fenix.Repo,
   password: "password",
   database: "fenix_dev",
   hostname: "localhost",
+  maintenance_database: "postgres",
+  ssl: false,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
