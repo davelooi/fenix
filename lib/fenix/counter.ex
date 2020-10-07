@@ -23,7 +23,7 @@ defmodule Fenix.Counter do
   end
 
   def find_and_inc(key) do
-    counter = Fenix.Repo.one(from c in Fenix.Counter, where: c.key == ^key)
+    counter = Fenix.Repo.one!(from c in Fenix.Counter, where: c.key == ^key)
 
     counter
     |> Fenix.Counter.changeset(%{counter: counter.counter + 1})
