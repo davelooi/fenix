@@ -1,6 +1,11 @@
 FROM elixir:1.10-alpine
 
 ENV MIX_HOME=/opt/mix
+ENV MIX_ENV=prod
+
+ARG DATABASE_URL=placeholder
+ARG MAINTENANCE_DATABASE=placeholder
+ARG SECRET_KEY_BASE=placeholder
 
 RUN mkdir /app
 WORKDIR /app
