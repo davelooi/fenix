@@ -1,5 +1,7 @@
 FROM elixir:1.10-alpine
 
+ENV MIX_HOME=/opt/mix
+
 RUN mkdir /app
 WORKDIR /app
 
