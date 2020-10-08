@@ -21,7 +21,9 @@ config :fenix, Fenix.Repo,
   ssl: true,
   url: database_url,
   maintenance_database: maintenance_database,
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "5")
+  queue_target: 5000,
+  queue_interval: 5000,
+  pool_size: 2
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
