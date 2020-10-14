@@ -10,7 +10,7 @@ COPY config config
 COPY lib lib
 COPY priv priv
 
-RUN mix do deps.get
+RUN mix do deps.get, deps.compile
 RUN mix release
 
 
