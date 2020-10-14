@@ -23,5 +23,6 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY --from=build _build _build
+COPY --from=build priv priv
 
 CMD [ "_build/prod/rel/fenix/bin/fenix", "start" ]
