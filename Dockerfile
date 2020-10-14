@@ -1,23 +1,27 @@
-FROM elixir:1.10-alpine
+FROM elixir:1.10-alpine AS build
 
-ENV MIX_HOME=/opt/mix
-ENV MIX_ENV=prod
+ARG MIX_ENV=prod
 
-ARG DATABASE_URL=placeholder
-ARG MAINTENANCE_DATABASE=placeholder
-ARG SECRET_KEY_BASE=placeholder
+RUN mix local.hex --force
+RUN mix local.rebar --force
+
+COPY mix.exs mix.lock ./
+COPY config config
+COPY lib lib
+COPY priv priv
+
+RUN mix do deps.get
+RUN mix release
+
+
+
+FROM alpine:3.12
+
+RUN apk add ncurses-libs
 
 RUN mkdir /app
 WORKDIR /app
 
-COPY mix.exs mix.lock ./
-COPY config config
+COPY --from=build _build _build
 
-RUN mix local.hex --force
-RUN mix local.rebar --force
-RUN mix do deps.get, deps.compile
-
-COPY lib lib
-COPY priv priv
-
-CMD [ "mix", "phx.server" ]
+CMD [ "_build/prod/rel/fenix/bin/fenix", "start" ]
