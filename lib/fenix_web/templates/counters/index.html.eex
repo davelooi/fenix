@@ -1,3 +1,8 @@
 <div class="phx-hero">
-  <h2>Hello World, from Phoenix!</h2>
+  <h2>All the counters</h2>
+  <ul>
+    <%= for counter <- @counters do %>
+      <li><%= link "#{counter.key}:#{counter.counter}", to: Routes.counters_path(@conn, :show, counter.key) %></li>
+    <% end %>
+  </ul>
 </div>
