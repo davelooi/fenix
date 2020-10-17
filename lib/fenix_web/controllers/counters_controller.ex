@@ -8,7 +8,8 @@ defmodule FenixWeb.CountersController do
 
   def show(conn, %{"key" => key}) do
     counter = Fenix.Counter.find_and_inc(key)
-    render(conn, "show.html", counter: counter)
+    # render(conn, "show.html", counter: counter)
+    text(conn, counter.counter)
   end
 
   def create(conn, %{"key" => key}) do
